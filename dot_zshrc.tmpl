@@ -110,6 +110,9 @@ else
   export EDITOR="vim"
 fi
 
+# secrets needed for chatgpt
+export OPEN_API_KEY={{- onepasswordRead "op://Private/openAI API KEY/credential" }}
+
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
 export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
