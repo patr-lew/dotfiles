@@ -110,6 +110,32 @@ else
   export EDITOR="vim"
 fi
 
+# update the chezmoi-managed Brewfile
+brew() {
+  command brew "$@"
+  if [[ "$1" == "install" || "$1" == "uninstall" || "$1" == "upgrade" ]]; then
+    echo "Updating Brewfile..."
+    brew bundle dump --file="$HOME/.config/homebrew/Brewfile" --force --describe
+  fi
+}
+
+npm() {
+  if [[ ("$1" = "install" || "$1" = "i") && "$*" == *"-g"* ]]; then
+    command npm "$@"
+    echo "Updating global npm packages list..."
+    npm ls -g --depth=0 --parseable=true | grep -v node_modules/npm | awk -F/ '{print $NF}' > "$HOME/.config/Npmfile"
+  else
+    command npm "$@"
+  fi
+}
+
+## Aliases
+# alias for 'op run --env-file=some-file'
+# usage: openv some-file -- further-commands
+function openv() {
+  op run --env-file="$1" -- "${@:3}"
+}
+
 # secrets needed for chatgpt
 export OPENAI_API_KEY={{- onepasswordRead "op://Private/openAI API KEY/credential" }}
 
