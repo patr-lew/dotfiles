@@ -1,0 +1,144 @@
+tap "arl/arl"
+tap "cormacrelf/tap"
+tap "derailed/k9s"
+tap "jayadamsmorgan/yatoro"
+tap "jesseduffield/lazydocker"
+tap "jesseduffield/lazygit"
+tap "kardolus/chatgpt-cli"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Arbitrary precision numeric processing language
+brew "bc"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Library for command-line editing
+brew "readline"
+# General-purpose scripting language
+brew "php"
+# Dependency Manager for PHP
+brew "composer"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GNU awk utility
+brew "gawk"
+# GitHub command-line tool
+brew "gh"
+# Open-source GitLab command-line tool
+brew "glab"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@76"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Fast, Dynamic Programming Language
+brew "julia"
+# Package manager for the Lua programming language
+brew "luarocks"
+# Run a Kubernetes cluster locally
+brew "minikube"
+# Fast, highly customisable system info script
+brew "neofetch"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
+# Control nvim processes using `nvr` command-line tool
+brew "neovim-remote"
+# Retrieves currently playing media, and simulates media actions
+brew "nowplaying-cli"
+# Manage multiple Node.js versions
+brew "nvm"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# Fast, disk space efficient package manager
+brew "pnpm"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Syntax-aware linter for prose
+brew "vale"
+# Watch files and take action when they change
+brew "watchman"
+# Internet file retriever
+brew "wget"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
+# Git in your tmux status bar.
+brew "arl/arl/gitmux"
+# Watcher for macOS 10.14+ light/dark mode changes
+brew "cormacrelf/tap/dark-notify"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "derailed/k9s/k9s"
+# VIM-like Apple Music Player in Terminal
+brew "jayadamsmorgan/yatoro/yatoro"
+# A simple terminal UI for docker, written in Go
+brew "jesseduffield/lazydocker/lazydocker"
+# A simple terminal UI for git commands, written in Go
+brew "jesseduffield/lazygit/lazygit"
+# CLI for interacting with the OpenAI and Azure ChatGPT API
+brew "kardolus/chatgpt-cli/chatgpt-cli"
+# Command-line interface for 1Password
+cask "1password-cli"
+# Photography workflow application and raw developer
+cask "darktable"
+# Google Chromium, sans integration with Google
+cask "eloston-chromium"
+cask "font-meslo-lg-nerd-font"
+cask "font-monaspace-nerd-font"
+cask "font-noto-sans-symbols-2"
+# Font editor and converter for outline and bitmap fonts
+cask "fontforge"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+# Free and open-source painting and sketching program
+cask "krita"
+# Kubernetes IDE
+cask "lens"
+# Tool to render realistic skies in real time on the screen
+cask "stellarium"
+# Open-source code editor
+cask "visual-studio-code"
+# Open-source code editor
+cask "visual-studio-code@insiders"
+vscode "42crunch.vscode-openapi"
+vscode "astro-build.astro-vscode"
+vscode "avetis.nord-palette"
+vscode "bradlc.vscode-tailwindcss"
+vscode "christian-kohler.npm-intellisense"
+vscode "dbaeumer.vscode-eslint"
+vscode "docker.docker"
+vscode "enkia.tokyo-night"
+vscode "esbenp.prettier-vscode"
+vscode "expo.vscode-expo-tools"
+vscode "firefox-devtools.vscode-firefox-debug"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "google.geminicodeassist"
+vscode "huytd.nord-light"
+vscode "monokai.theme-monokai-pro-vscode"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode-remote.remote-containers"
+vscode "pkief.material-icon-theme"
+vscode "redhat.vscode-yaml"
+vscode "vscode-icons-team.vscode-icons"
+vscode "vscodevim.vim"
+vscode "vue.volar"

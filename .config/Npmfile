@@ -1,0 +1,11 @@
+lib
+spectral-cli
+corepack
+eslint_d
+expo-cli
+neovim
+react-devtools
+typescript-language-server
+typescript
+yaml-language-server
+@tailwind/language-server
