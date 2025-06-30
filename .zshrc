@@ -56,12 +56,23 @@ npm() {
   fi
 }
 
+pnpm() {
+  command op run -- pnpm "$@"
+}
+
 ## Aliases
 # alias for 'op run --env-file=some-file'
 # usage: openv some-file -- further-commands
 function openv() {
   op run --env-file="$1" -- "${@:3}"
 }
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -75,4 +86,6 @@ export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 export PATH="$PATH:/$HOME/.local/bin"
+
+
 
