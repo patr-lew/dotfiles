@@ -43,7 +43,7 @@ brew() {
 }
 
 npm() {
-  if [[ "$1" = "install" || "$1" = "i" || "$1" = "ci" ]]; then
+  if [[ "$1" = "install" || "$1" = "i" || "$1" = "ci" || "$1" = "outdated" ]]; then
     if [[ "$*" == *"-g"* ]]; then
       command npm "$@"
       echo "Updating global npm packages list..."
@@ -82,10 +82,6 @@ alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
 export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 export PATH="$PATH:/$HOME/.local/bin"
-
-
-
