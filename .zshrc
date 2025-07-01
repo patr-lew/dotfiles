@@ -85,3 +85,4 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 export PATH="$PATH:/$HOME/.local/bin"
+

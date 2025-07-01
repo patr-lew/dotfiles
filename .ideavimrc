@@ -29,7 +29,6 @@ Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 
 
-map <leader>e :NERDTreeFocus<CR>
 
 " --- Window Navigation ---
 " Use <C-h,j,k,l> to navigate between windows (splits)
@@ -55,3 +54,15 @@ nnoremap <leader>l :tabnext<CR>
 
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
+
+
+" --- Map <leader>h to call the function ---
+" This mapping works in Normal mode
+nnoremap <leader><leader> :action SearchEverywhere<CR>
+nnoremap <leader>e :action SelectInProjectView<CR>
+nnoremap <leader>r :action GotoRelated<CR>
+nnoremap <leader>sg :action SearchInPath<CR>
+nnoremap <leader>f :action ReformatCode<CR>
+nnoremap <leader>, :action Switcher<CR>
+nnoremap q :action EditorEscape<CR>
+
