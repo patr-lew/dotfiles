@@ -26,6 +26,7 @@ map Q gq
 Plug 'machakann/vim-highlightedyank'
 " Commentary plugin
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 
 
@@ -61,8 +62,9 @@ nnoremap <leader>l :tabnext<CR>
 nnoremap <leader><leader> :action SearchEverywhere<CR>
 nnoremap <leader>e :action SelectInProjectView<CR>
 nnoremap <leader>r :action GotoRelated<CR>
-nnoremap <leader>sg :action SearchInPath<CR>
+nnoremap <leader>s :action SearchInPath<CR>
 nnoremap <leader>f :action ReformatCode<CR>
 nnoremap <leader>, :action Switcher<CR>
-nnoremap q :action EditorEscape<CR>
+nnoremap <leader>m :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <leader>v :action SplitVertically<CR>
 

@@ -43,7 +43,7 @@ brew() {
 }
 
 npm() {
-  if [[ "$1" = "install" || "$1" = "i" || "$1" = "ci" || "$1" = "outdated" ]]; then
+  if [[ "$1" = "install" || "$1" = "i" || "$1" = "ci" || "$1" = "outdated" || "$1" == "view" ]]; then
     if [[ "$*" == *"-g"* ]]; then
       command npm "$@"
       echo "Updating global npm packages list..."
