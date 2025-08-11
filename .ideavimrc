@@ -46,6 +46,10 @@ nnoremap <leader>l :tabnext<CR>
 ""nnoremap <M-h> <leader>h
 ""nnoremap <M-l> <leader>l
 
+" --- Navigation between mouse positions ---
+map <C-,> <Action>(Back)
+map <C-.> <Action>(Forward)
+
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
@@ -63,8 +67,10 @@ nnoremap <leader><leader> :action SearchEverywhere<CR>
 nnoremap <leader>e :action SelectInProjectView<CR>
 nnoremap <leader>r :action GotoRelated<CR>
 nnoremap <leader>s :action SearchInPath<CR>
-nnoremap <leader>f :action ReformatCode<CR>
+nnoremap <leader>f :action ReformatWithPrettierAction<CR>
 nnoremap <leader>, :action Switcher<CR>
 nnoremap <leader>m :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>v :action SplitVertically<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
 
