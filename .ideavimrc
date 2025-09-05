@@ -67,7 +67,7 @@ nnoremap <leader><leader> :action SearchEverywhere<CR>
 nnoremap <leader>e :action SelectInProjectView<CR>
 nnoremap <leader>r :action GotoRelated<CR>
 nnoremap <leader>s :action SearchInPath<CR>
-nnoremap <leader>f :action ReformatWithPrettierAction<CR>
+nnoremap <leader>fs :action ReformatWithPrettierAction<CR>w<CR>
 nnoremap <leader>, :action Switcher<CR>
 nnoremap <leader>m :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>v :action SplitVertically<CR>
