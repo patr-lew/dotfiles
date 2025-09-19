@@ -60,6 +60,8 @@ map <C-.> <Action>(Forward)
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
 
+" Confirm in context menu
+map <C-y> <Enter>
 
 " --- Map <leader>h to call the function ---
 " This mapping works in Normal mode
@@ -71,6 +73,7 @@ nnoremap <leader>fs :action ReformatWithPrettierAction<CR>w<CR>
 nnoremap <leader>, :action Switcher<CR>
 nnoremap <leader>m :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>v :action SplitVertically<CR>
+nnoremap <leader>gg :action Vcs.QuickListPopupAction<CR>
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 
