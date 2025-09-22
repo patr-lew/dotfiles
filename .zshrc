@@ -79,6 +79,9 @@ alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # local and private env variables:
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+# k9s
+export K9S_CONFIG_DIR="$HOME/.config/k9s"
+
 export PATH="/opt/homebrew/opt/bc/bin:$PATH"
 export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
