@@ -86,3 +86,4 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 export PATH="$PATH:/$HOME/.local/bin"
 
+export PATH=$PATH:$(go env GOPATH)/bin
