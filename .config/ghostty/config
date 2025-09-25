@@ -43,10 +43,10 @@ font-family = JetBrainsMono Nerd Font
 # resize-overlay-duration = 4s 200ms
 
 #theme = dark:tokyonight-storm,light:tokyonight-day
-theme = dark:cyberdream,light:cyberdream-light
+theme = dark:TokyoNight Storm,light:TokyoNight Day
 macos-option-as-alt = true
-background-opacity = 0.80
-background-blur = 30
+# background-opacity = 0.80
+# background-blur = 30
 title = " "
 macos-titlebar-proxy-icon = hidden
 
