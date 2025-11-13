@@ -47,6 +47,8 @@ theme = dark:TokyoNight Storm,light:TokyoNight Day
 macos-option-as-alt = true
 # background-opacity = 0.80
 # background-blur = 30
-title = " "
+
+# temporarily commented out
+# title = " "
 macos-titlebar-proxy-icon = hidden
 
