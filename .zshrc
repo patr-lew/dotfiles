@@ -89,7 +89,12 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 export PATH="$PATH:/$HOME/.local/bin"
 
+export GOBIN=$HOME/go/bin
+export PATH="$GOBIN:$PATH"
+
+export GOPATH="$HOME/go"
 export PATH=$PATH:$(go env GOPATH)/bin
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
