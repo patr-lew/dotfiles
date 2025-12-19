@@ -12,6 +12,11 @@ plugins=(git colorize colored-man-pages 1password command-not-found emoji-clock 
 
 source $ZSH/oh-my-zsh.sh
 
+# Disable terminal title setting in tmux to let tmux handle window naming
+if [[ -n "$TMUX" ]]; then
+  DISABLE_AUTO_TITLE="true"
+fi
+
 # User configuration
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,

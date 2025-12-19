@@ -73,7 +73,17 @@ nnoremap <leader>fs :action ReformatWithPrettierAction<CR>w<CR>
 nnoremap <leader>, :action Switcher<CR>
 nnoremap <leader>m :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>v :action SplitVertically<CR>
-nnoremap <leader>gg :action Vcs.QuickListPopupAction<CR>
+"nnoremap <leader>gg :action Vcs.QuickListPopupAction<CR>
+nnoremap <leader>/ :action FindInPath<CR>
+
+nnoremap <leader>gg :action CheckinProject<CR>
+nnoremap <leader>ghr :action Vcs.RollbackChangedLines<CR>
+
+nnoremap <leader>or :action RunAnything<CR>
+
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
+
+nnoremap ]h :action VcsShowNextChangeMarker<CR>
+nnoremap [h :action VcsShowPrevChangeMarker<CR>
 
