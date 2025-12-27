@@ -44,7 +44,7 @@ font-family = JetBrainsMono Nerd Font
 
 #theme = dark:tokyonight-storm,light:tokyonight-day
 theme = dark:TokyoNight Storm,light:TokyoNight Day
-macos-option-as-alt = true
+macos-option-as-alt = left
 # background-opacity = 0.80
 # background-blur = 30
 
