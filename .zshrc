@@ -104,3 +104,5 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Accept autosuggestions with Ctrl-Y.
 bindkey '^Y' autosuggest-accept
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export BAT_THEME="tokyonight_storm"
