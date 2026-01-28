@@ -33,29 +33,10 @@ Plug 'preservim/nerdtree'
 
 " --- Window Navigation ---
 " Use <C-h,j,k,l> to navigate between windows (splits)
-" nnoremap means "non-recursive mapping for normal mode" - it's the safest way to map keys.
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" --- Tab Navigation ---
-" Use <leader> + h/l to move between tabs
-nnoremap <leader>h :tabprevious<CR>
-nnoremap <leader>l :tabnext<CR>
-""nnoremap <M-h> <leader>h
-""nnoremap <M-l> <leader>l
-
-" --- Navigation between mouse positions ---
-map <C-,> <Action>(Back)
-map <C-.> <Action>(Forward)
-
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-"" Map \r to the Reformat Code action
-"map \r <Action>(ReformatCode)
-
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
 
 "" Map \b to toggle the breakpoint on the current line
 "map \b <Action>(ToggleLineBreakpoint)
@@ -73,17 +54,23 @@ nnoremap <leader>fs :action ReformatWithPrettierAction<CR>w<CR>
 nnoremap <leader>, :action Switcher<CR>
 nnoremap <leader>m :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <leader>v :action SplitVertically<CR>
-"nnoremap <leader>gg :action Vcs.QuickListPopupAction<CR>
 nnoremap <leader>/ :action FindInPath<CR>
 
+"nnoremap <leader>gg :action Vcs.QuickListPopupAction<CR>
 nnoremap <leader>gg :action CheckinProject<CR>
 nnoremap <leader>ghr :action Vcs.RollbackChangedLines<CR>
+"nnoremap <leader>ghb :action Annotate<CR> -- doesn't work
+nnoremap <leader>go :action Compare.SameVersion<CR>
 
 nnoremap <leader>or :action RunAnything<CR>
+nnoremap <leader>ot :action ActivateRunToolWindow<CR>
 
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 
 nnoremap ]h :action VcsShowNextChangeMarker<CR>
 nnoremap [h :action VcsShowPrevChangeMarker<CR>
+nnoremap <leader><tab>[ :tabprevious<CR>
+nnoremap <leader><tab>] :tabnext<CR>
 
+nnoremap <leader>uz :action ToggleZenMode<CR>
