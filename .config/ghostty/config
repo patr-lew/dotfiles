@@ -21,6 +21,11 @@
 # # separated by equals signs.
 font-family = JetBrainsMono Nerd Font
 font-thicken = true
+font-thicken-strength = 220
+minimum-contrast = 1.15
+alpha-blending = native
+# Uncomment and test if this style exists for your installed family.
+# font-style = SemiBold
 # window-padding-x = 2
 #
 # # Spacing around the equals sign does not matter.
@@ -93,4 +98,5 @@ macos-titlebar-proxy-icon = hidden
 # custom-shader = shaders/cursor_blaze.glsl
 # custom-shader = shaders/cursor_blaze_no_trail.glsl
 # custom-shader = shaders/cursor_smear.glsl
-custom-shader = shaders/cursor_smear_fade.glsl
+# Disabled for text clarity testing; shaders can reduce perceived sharpness.
+# custom-shader = shaders/cursor_smear_fade.glsl
