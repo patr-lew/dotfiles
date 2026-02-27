@@ -84,6 +84,9 @@ alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # local and private env variables:
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+# initialize zoxide (read result of zoxide init)
+[[ -f ~/.config/zoxide/config.sh ]] && source ~/.config/zoxide/config.sh
+
 # k9s
 export K9S_CONFIG_DIR="$HOME/.config/k9s"
 
