@@ -65,6 +65,8 @@ nnoremap <leader>go :action Compare.SameVersion<CR>
 nnoremap <leader>or :action RunAnything<CR>
 nnoremap <leader>ot :action ActivateRunToolWindow<CR>
 
+nnoremap <leader>ca :action ShowIntentionActions<CR>
+
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 
