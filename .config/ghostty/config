@@ -49,7 +49,7 @@ alpha-blending = native
 # resize-overlay-duration = 4s 200ms
 
 #theme = dark:tokyonight-storm,light:tokyonight-day
-theme = dark:TokyoNight Storm,light:TokyoNight Day
+theme = dark:TokyoNight Night,light:TokyoNight Day
 macos-option-as-alt = left
 # background-opacity = 0.80
 # background-blur = 30
