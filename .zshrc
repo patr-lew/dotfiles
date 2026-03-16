@@ -80,6 +80,8 @@ case ":$PATH:" in
 esac
 
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias lg=lazygit
+alias nv=nvim
 
 # local and private env variables:
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
