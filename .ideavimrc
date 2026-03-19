@@ -72,6 +72,10 @@ nnoremap gi :action GotoImplementation<CR>
 
 nnoremap ]h :action VcsShowNextChangeMarker<CR>
 nnoremap [h :action VcsShowPrevChangeMarker<CR>
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
+
+
 nnoremap <leader><tab>[ :tabprevious<CR>
 nnoremap <leader><tab>] :tabnext<CR>
 
