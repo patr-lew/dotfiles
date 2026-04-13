@@ -118,4 +118,4 @@ export BAT_THEME="tokyonight_storm"
 
 ASYNCAPI_AC_ZSH_SETUP_PATH=/Users/patryk.lewandowski/Library/Caches/@asyncapi/cli/autocomplete/zsh_setup && test -f $ASYNCAPI_AC_ZSH_SETUP_PATH && source $ASYNCAPI_AC_ZSH_SETUP_PATH; # asyncapi autocomplete setup
 
-
+export PATH="/opt/homebrew/opt/bison/bin:$PATH"
