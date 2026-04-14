@@ -1,0 +1,202 @@
+#!/bin/bash
+
+set -x -o pipefail
+
+WORKTREE_DIR=""
+WORKTREE_CREATED=0
+WINDOW_ID=""
+WINDOW_CREATED=0
+
+print_help() {
+  echo -e "Usage: fzf-worktree [options]\n"
+  echo "-C, --cwd     working directory to run this from"
+  echo "-h, --help    show this help"
+}
+
+get_repo_name() {
+  local origin_url="$(git remote get-url origin)"
+  origin_url="${origin_url%.git}"
+  origin_url="${origin_url%/}"
+
+  if [[ "$origin_url" == *"/_git/"* ]]; then
+    echo "${origin_url##*/_git/}"
+  else
+    echo "${origin_url##*/}"
+  fi
+}
+
+get_worktrees_home() {
+  if [[ -n "${MAIN_PROJECT_HOME:-}" ]]; then
+    echo "$MAIN_PROJECT_HOME/worktrees"
+    return 0
+  fi
+
+  local common_git_dir="$(git rev-parse --path-format=absolute --git-common-dir)"
+  echo "$(dirname "$(dirname "$common_git_dir")")/worktrees"
+}
+
+while (($# > 0)); do
+  case $1 in
+  -C | --cwd)
+    cd "$2"
+    shift
+    shift
+    ;;
+  -h | --help)
+    print_help
+    exit 0
+    ;;
+  *)
+    echo "Unknown argument $1"
+    print_help
+    exit 1
+    ;;
+  esac
+done
+
+pick_branch() {
+  local branch="$(
+    git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads refs/remotes/origin | rg -v '^(origin|origin/HEAD)$' |
+      fzf --tmux --border-label ' branches ' --info=hidden --no-sort \
+        --bind 'ctrl-d:execute(
+                    selected_branch="{}"
+                    if git show-ref --verify --quiet "refs/remotes/$selected_branch"; then
+                        branch="${selected_branch#*/}"
+                    else
+                        branch="$selected_branch"
+                    fi
+                    worktree="$(git branch --list "$branch" --format "%(worktreepath)")"
+                    session="$branch"
+                    if [[ -n "$worktree" ]]; then
+                        window_id="$(tmux list-windows -t "$session" -F "#{window_id}\t#{pane_current_path}" 2>/dev/null | while IFS="$(printf "\t")" read -r id path; do
+                            if [[ "$path" == "$worktree" ]]; then
+                                echo "$id"
+                                break
+                            fi
+                        done)"
+                        if git worktree remove --force "$worktree"; then
+                            if [[ -n "$window_id" ]]; then
+                                tmux kill-window -t "$window_id" &>/dev/null
+                            fi
+                        fi
+                    fi
+                )+reload(git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads refs/remotes/origin | rg -v "^(origin|origin/HEAD)$")'
+  )"
+
+  if [[ -z "$branch" ]]; then
+    return 2
+  fi
+
+  if git show-ref --verify --quiet "refs/remotes/$branch"; then
+    local local_branch="${branch#*/}"
+    if ! git show-ref --verify --quiet "refs/heads/$local_branch"; then
+      git branch --quiet "$local_branch" -t "$branch"
+    fi
+    branch="$local_branch"
+  fi
+
+  if ! git show-ref --verify --quiet "refs/heads/$branch"; then
+    return 1
+  fi
+
+  echo "$branch"
+}
+
+# Remove slashes from branch name since they can't be used in filenames
+setup_worktree() {
+  local branch="$1"
+  local repo_worktree_dir="$2"
+  local existing_worktree="$(git branch --list "$branch" --format "%(worktreepath)")"
+
+  WORKTREE_CREATED=0
+  if [[ -z "$existing_worktree" ]]; then
+    local clean_branch="$(echo "$branch" | tr / -)"
+    local worktree_dir="$repo_worktree_dir/$clean_branch"
+    mkdir -p "$repo_worktree_dir"
+    git worktree prune
+    git worktree add --quiet "$worktree_dir" "$branch"
+    WORKTREE_CREATED=1
+    WORKTREE_DIR="$worktree_dir"
+  else
+    WORKTREE_DIR="$existing_worktree"
+  fi
+}
+
+find_window_id() {
+  local session="$1"
+  local worktree_dir="$2"
+
+  tmux list-windows -t "$session" -F '#{window_id}\t#{pane_current_path}' 2>/dev/null |
+    awk -F $'\t' -v worktree_dir="$worktree_dir" '$2 == worktree_dir { print $1; exit }'
+}
+
+set_window_name() {
+  local window_id="$1"
+  local repo_name="$2"
+
+  tmux set-window-option -t "$window_id" automatic-rename off &>/dev/null
+  tmux rename-window -t "$window_id" "$repo_name"
+}
+
+# Handle corresponding tmux sessions
+ensure_session_window() {
+  local repo_name="$1"
+  local branch="$2"
+  local worktree_dir="$3"
+
+  local session="$branch"
+  WINDOW_CREATED=0
+  WINDOW_ID=""
+
+  if ! tmux has-session -t "$session" &>/dev/null; then
+    WINDOW_CREATED=1
+    WINDOW_ID="$(tmux new-session -d -P -F '#{window_id}' -s "$session" -n "$repo_name" -c "$worktree_dir")"
+  else
+    WINDOW_ID="$(find_window_id "$session" "$worktree_dir")"
+    if [[ -z "$WINDOW_ID" ]]; then
+      WINDOW_CREATED=1
+      WINDOW_ID="$(tmux new-window -d -P -F '#{window_id}' -t "$session:" -n "$repo_name" -c "$worktree_dir")"
+    fi
+  fi
+
+  set_window_name "$WINDOW_ID" "$repo_name"
+}
+
+maybe_install_dependencies() {
+  local worktree_dir="$1"
+  local window_id="$2"
+
+  if [[ "$WINDOW_CREATED" -ne 1 || ! -f "$worktree_dir/package-lock.json" || -d "$worktree_dir/node_modules" ]]; then
+    return 0
+  fi
+
+  local install_command=""
+  printf -v install_command 'cd %q && op run -- npm install' "$worktree_dir"
+  tmux send-keys -t "$window_id" "$install_command" C-m
+}
+
+notify_session_ready() {
+  local branch="$1"
+  local repo_name="$2"
+
+  if [[ -n "${TMUX:-}" ]]; then
+    tmux display-message "Prepared session '$branch' with window '$repo_name'"
+  else
+    echo "Prepared session '$branch' with window '$repo_name'"
+  fi
+}
+
+WORKTREES_HOME="$(get_worktrees_home)"
+REPO_NAME="$(get_repo_name)"
+repo_worktree_dir="$WORKTREES_HOME/$REPO_NAME"
+
+branch="$(pick_branch)"
+case $? in
+1) exit 1 ;;
+2) exit 0 ;;
+esac
+
+setup_worktree "$branch" "$repo_worktree_dir"
+ensure_session_window "$REPO_NAME" "$branch" "$WORKTREE_DIR"
+maybe_install_dependencies "$WORKTREE_DIR" "$WINDOW_ID"
+notify_session_ready "$branch" "$REPO_NAME"
