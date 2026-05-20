@@ -105,14 +105,15 @@ pick_branch() {
 # Remove slashes from branch name since they can't be used in filenames
 setup_worktree() {
   local branch="$1"
-  local repo_worktree_dir="$2"
+  local all_worktrees_dir="$2"
+  local repo_name="$3"
   local existing_worktree="$(git branch --list "$branch" --format "%(worktreepath)")"
 
   WORKTREE_CREATED=0
   if [[ -z "$existing_worktree" ]]; then
     local clean_branch="$(echo "$branch" | tr / -)"
-    local worktree_dir="$repo_worktree_dir/$clean_branch"
-    mkdir -p "$repo_worktree_dir"
+    local worktree_dir="$all_worktrees_dir/$clean_branch/$repo_name"
+    mkdir -p "$all_worktrees_dir"
     git worktree prune
     git worktree add --quiet "$worktree_dir" "$branch"
     WORKTREE_CREATED=1
@@ -188,7 +189,6 @@ notify_session_ready() {
 
 WORKTREES_HOME="$(get_worktrees_home)"
 REPO_NAME="$(get_repo_name)"
-repo_worktree_dir="$WORKTREES_HOME/$REPO_NAME"
 
 branch="$(pick_branch)"
 case $? in
@@ -196,7 +196,7 @@ case $? in
 2) exit 0 ;;
 esac
 
-setup_worktree "$branch" "$repo_worktree_dir"
+setup_worktree "$branch" "$WORKTREES_HOME" "$REPO_NAME"
 ensure_session_window "$REPO_NAME" "$branch" "$WORKTREE_DIR"
 maybe_install_dependencies "$WORKTREE_DIR" "$WINDOW_ID"
 notify_session_ready "$branch" "$REPO_NAME"
